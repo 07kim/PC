@@ -1,0 +1,149 @@
+{
+  "pc_info": {
+    "owner": "佐藤 (Sato)",
+    "last_login": "2021-04-15 15:10:00",
+    "os_version": "Windows XP Professional",
+    "system_year": 2026
+  },
+  "initial_files": [
+    {
+      "id": "readme",
+      "name": "メモ.txt",
+      "type": "text",
+      "folder": "desktop",
+      "content": "2021年4月 備忘録\n\n・さくら動物病院の予約確認（メール参照）\n・ブラウザからD-dropにアクセス（メンテ作業）\n・引っ越しの準備、不用品の整理\n・マル秘:28174\n\nファイルを隠した。",
+      "position": { "x": 40, "y": 40 }
+    },
+    {
+      "id": "doc1",
+      "name": "業務日報_20210415.txt",
+      "type": "text",
+      "folder": "documents",
+      "content": "2021/04/15 14:00\nターゲットの移送完了。302号室に隔離。\n2021/04/15 15:00\nD-DROPによるログ隠蔽作業開始。\n\n追記：\n「あの子」がずっと泣いている。誰にも見つからない場所へ移すべきか。",
+      "position": { "x": 0, "y": 0 }
+    },
+    {
+      "id": "doc2",
+      "name": "password_memo.txt",
+      "type": "text",
+      "folder": "documents",
+      "content": "各サイトのパスワードメモ\n\nAmazon: sato_1985\nネットバンク: pass8932\n※絶対に忘れないこと",
+      "position": { "x": 100, "y": 0 }
+    },
+    {
+      "id": "doc_trap",
+      "name": "罠.txt",
+      "type": "text",
+      "folder": "documents",
+      "isHidden": true,
+      "content": "マル秘.exeを起動させるには、時間を戻して2021年4月15日の15時10分に合わせる必要がある。",
+      "position": { "x": 100, "y": 0 }
+    },
+    {
+      "id": "pic_1",
+      "name": "公園の少女.jpg",
+      "type": "image",
+      "folder": "pictures",
+      "isCorrupted": true,
+      "content": "https://images.unsplash.com/photo-1616428612170-0775e52cc19f?q=80&w=800",
+      "position": { "x": 40, "y": 40 }
+    },
+    {
+      "id": "pic_2",
+      "name": "vacation_photo.jpg",
+      "type": "image",
+      "folder": "pictures",
+      "isCorrupted": false,
+      "content": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "position": { "x": 140, "y": 40 }
+    },
+    {
+      "id": "pic_3",
+      "name": "現場周辺.jpg",
+      "type": "image",
+      "folder": "pictures",
+      "isCorrupted": true,
+      "content": "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?q=80&w=800",
+      "position": { "x": 240, "y": 40 }
+    },
+    { "id": "f_girl1", "name": "少女1", "type": "folder", "folder": "pictures", "position": { "x": 40, "y": 140 } },
+    { "id": "f_girl2", "name": "少女2", "type": "folder", "folder": "pictures", "position": { "x": 140, "y": 140 } },
+    { "id": "dummy_1_1", "name": "DSC00841.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_2", "name": "DSC00842.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_3", "name": "DSC00843.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_4", "name": "DSC00844.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_5", "name": "DSC00845.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_6", "name": "DSC00846.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_7", "name": "DSC00847.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_8", "name": "DSC00848.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_9", "name": "DSC00849.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_10", "name": "DSC00850.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_11", "name": "DSC00851.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_12", "name": "DSC00852.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_13", "name": "DSC00853.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_14", "name": "DSC00854.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_1_15", "name": "DSC00855.jpg", "type": "image", "folder": "f_girl1", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_1", "name": "DSC00901.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_2", "name": "DSC00902.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_3", "name": "DSC00903.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_4", "name": "DSC00904.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_5", "name": "DSC00905.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_6", "name": "DSC00906.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_7", "name": "DSC00907.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_8", "name": "DSC00908.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_9", "name": "DSC00909.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_10", "name": "DSC00910.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_11", "name": "DSC00911.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_12", "name": "DSC00912.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_13", "name": "DSC00913.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_14", "name": "DSC00914.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "dummy_2_15", "name": "DSC00915.jpg", "type": "image", "folder": "f_girl2", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_1", "name": "REC_20210415_01.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_2", "name": "REC_20210415_02.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_3", "name": "REC_20210415_03.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_4", "name": "REC_20210415_04.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_5", "name": "REC_20210415_05.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_6", "name": "REC_20210415_06.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_7", "name": "REC_20210415_07.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_8", "name": "REC_20210415_08.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_9", "name": "REC_20210415_09.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_10", "name": "REC_20210415_10.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_11", "name": "REC_20210415_11.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_12", "name": "REC_20210415_12.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_13", "name": "REC_20210415_13.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_14", "name": "REC_20210415_14.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_15", "name": "REC_20210415_15.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_16", "name": "REC_20210415_16.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_17", "name": "REC_20210415_17.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_18", "name": "REC_20210415_18.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_19", "name": "REC_20210415_19.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    { "id": "m_20", "name": "REC_20210415_20.mp3", "type": "music", "folder": "music", "isCorrupted": true, "position": { "x": 0, "y": 0 } },
+    {
+      "id": "trash",
+      "name": "ゴミ箱",
+      "type": "trash",
+      "icon": "Trash2",
+      "folder": "desktop",
+      "position": { "x": 40, "y": 370 }
+    },
+    {
+      "id": "maintenance",
+      "name": "D-DROP Decryptor",
+      "type": "app",
+      "appId": "maintenance",
+      "icon": "ShieldCheck",
+      "folder": "desktop",
+      "position": { "x": 140, "y": 40 }
+    }
+  ],
+  "trash_files": [
+    {
+      "id": "plan_docx",
+      "name": "計画.docx",
+      "type": "text",
+      "content": "【2021年4月15日 スケジュール】\n\n10:00：機材の搬入\n12:00：津田沼の廃屋へ集合\n13:00：『決行』\n15:10：完了報告、D-DROPへアップロード\n18:00：撤収、足跡の消去",
+      "position": { "x": 0, "y": 0 }
+    }
+  ],
+  "hidden_files": []
+}
