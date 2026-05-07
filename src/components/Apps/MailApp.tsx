@@ -43,8 +43,8 @@ export const MailApp = ({ extraMails = [], onEmailRead }: Props) => {
     {
       id: 'm_k1',
       folder: 'inbox',
-      from: '鈴木 (K.Suzuki)',
-      fromEmail: 'k-suzuki@iris.local',
+      from: '伊藤 (M.Ito)',
+      fromEmail: 'm-ito@iris.local',
       to: '佐藤',
       toEmail: 'sato_archive@iris.local',
       subject: '元気か？',
@@ -248,8 +248,8 @@ export const MailApp = ({ extraMails = [], onEmailRead }: Props) => {
     {
       id: 't_d5',
       folder: 'trash',
-      from: '旧友・鈴木',
-      fromEmail: 'suzuki_h@docomo.local',
+      from: '旧友・伊藤',
+      fromEmail: 'ito_m@docomo.local',
       to: '佐藤',
       toEmail: 'sato_archive@iris.local',
       subject: '久しぶり！今度飲みに行かない？',

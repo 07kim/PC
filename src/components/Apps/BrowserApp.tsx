@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Globe, ArrowLeft, ArrowRight, RotateCw, ShieldAlert, Lock, RefreshCw, Monitor, X, Folder, FileText, Search, ChevronDown, MonitorPlay, Image as ImageIcon, Music } from 'lucide-react';
+import { Globe, ArrowLeft, ArrowRight, RotateCw, ShieldAlert, Lock, RefreshCw, Monitor, X, Folder, FileText, Search, ChevronDown, MonitorPlay, Image as ImageIcon, Music, Trash2, FileAudio, FileVideo } from 'lucide-react';
+import { File } from '@/types/os';
 
 interface Props {
   initialUrl?: string;
@@ -10,9 +11,10 @@ interface Props {
   onDownload?: (appId: string) => void;
   onTrueEndClear?: () => void;
   hasEvidenceFile?: boolean;
+  files: File[];
 }
 
-export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onReportViewed, onDownload, onTrueEndClear, hasEvidenceFile }: Props) => {
+export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onReportViewed, onDownload, onTrueEndClear, hasEvidenceFile, files }: Props) => {
   const [url, setUrl] = useState(initialUrl);
   const [inputUrl, setInputUrl] = useState(initialUrl);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,8 +53,8 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
 
       timer2 = setTimeout(() => {
         setDdropDownloadState('complete');
-        startDownload('secret');
-      }, 9000); // 7秒後（+2秒）で完了
+        onDownload('secret');
+      }, 7500); // 7秒後（+0.5秒）で完了
     } else {
       setDdropDownloadState('idle');
     }
@@ -80,6 +82,139 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
                     url.includes('anime-news.local') || 
                     url.includes('movie-ranking.local')) && !isArrestArticle;
   const isPoliceSubmit = url.includes('cyber-sec.npa.go.local/submit');
+  const isSakuraVet = url.includes('sakura-vet.local');
+  const isDDROPPortal = url.includes('d-drop.net/portal');
+
+  const getDDROPPublicContent = () => {
+    return (
+      <div style={{ maxWidth: 800, margin: '0 auto', paddingBottom: 60, background: '#fff' }}>
+        {/* ヒーローセクション */}
+        <div style={{ padding: '80px 40px', textAlign: 'center', background: 'linear-gradient(180deg, #f0f2f5 0%, #ffffff 100%)', borderBottom: '1px solid #d1d9e6' }}>
+          <div style={{ fontSize: 48, fontWeight: 'bold', color: '#1a1a2e', letterSpacing: 12, marginBottom: 20 }}>D-DROP</div>
+          <div style={{ fontSize: 14, color: '#4488ff', letterSpacing: 4, marginBottom: 40, fontWeight: 'bold' }}>THE NEXT GENERATION OF DATA SOVEREIGNTY</div>
+          <p style={{ fontSize: 15, color: '#555', maxWidth: 620, margin: '0 auto', lineHeight: 2 }}>
+            情報の「所有」から「分散」へ。D-DROPは、既存のクラウドストレージが抱える中央集権的な脆弱性を克服し、
+            絶対的な匿名性と可用性を実現する分散型アーカイブ・プラットフォームです。
+          </p>
+        </div>
+
+        {/* 技術説明セクション */}
+        <div style={{ padding: '60px 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30 }}>
+            <div style={{ padding: 24, border: '1px solid #e1e8f0', background: '#f8fafc' }}>
+              <div style={{ color: '#4488ff', fontWeight: 'bold', marginBottom: 12, fontSize: 14 }}>◈ 軍用レベルの暗号化</div>
+              <p style={{ fontSize: 12, color: '#666', lineHeight: 1.8 }}>
+                すべてのデータはAES-256規格で暗号化された後、独自のアルゴリズムで複数のチャンクに断片化されます。
+                断片化されたデータは単体では意味をなさず、全ノードからの収集と秘密鍵の照合なしには復元不可能です。
+              </p>
+            </div>
+            <div style={{ padding: 24, border: '1px solid #e1e8f0', background: '#f8fafc' }}>
+              <div style={{ color: '#4488ff', fontWeight: 'bold', marginBottom: 12, fontSize: 14 }}>◈ P2P分散ネットワーク</div>
+              <p style={{ fontSize: 12, color: '#666', lineHeight: 1.8 }}>
+                特定のサーバーを持ちません。世界中のボランティア・ノードにデータが分散配置されるため、
+                物理的なサーバー押収や政府による検閲、DDos攻撃によるサービス停止の影響を一切受けません。
+              </p>
+            </div>
+          </div>
+
+          {/* 警告/案内メッセージ */}
+          <div style={{ marginTop: 50, background: '#fff9e6', border: '1px solid #ffcc00', padding: '30px', borderRadius: 4, position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: -20, right: -20, fontSize: 120, color: 'rgba(255,204,0,0.1)', fontWeight: 'bold', pointerEvents: 'none' }}>!</div>
+            <div style={{ color: '#b38f00', fontWeight: 'bold', fontSize: 16, marginBottom: 15, display: 'flex', alignItems: 'center', gap: 10 }}>
+               ACCESS RESTRICTED
+            </div>
+            <div style={{ fontSize: 13, color: '#856a00', lineHeight: 2 }}>
+              D-DROPは現在、完全招待制のプライベートネットワークとして稼働しています。<br/>
+              **専用の管理ポータルおよび各アーカイブへのアクセスには、登録者ごとに発行される個別のポータルURLと認証トークンが必要です。**<br/><br/>
+              新規のノード参加希望、またはアーカイブ容量の購入については、既存の紹介者を通じてのみ受け付けております。
+              一般公開されているポータル以外からの不正アクセス試行は、ネットワーク全体で共有・遮断されます。
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const getSakuraVetContent = () => {
+    return (
+      <div style={{ padding: '0 0 40px 0', maxWidth: '100%', color: '#333', background: '#fff' }}>
+        <div style={{ background: '#fff5f7', padding: '20px 40px', borderBottom: '3px solid #ffb7c5', display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div style={{ width: 60, height: 60, background: '#ffb7c5', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 32 }}>🌸</div>
+          <div>
+            <h1 style={{ fontSize: 24, margin: 0, color: '#d81b60' }}>さくら動物病院</h1>
+            <div style={{ fontSize: 14, color: '#888' }}>Sakura Animal Hospital - あなたの大切な家族のために</div>
+          </div>
+        </div>
+        
+        <div style={{ padding: '30px 40px' }}>
+          <div style={{ display: 'flex', gap: 30, marginBottom: 40 }}>
+            <div style={{ flex: 1 }}>
+              <h2 style={{ fontSize: 18, borderLeft: '5px solid #ffb7c5', paddingLeft: 12, marginBottom: 15 }}>お知らせ</h2>
+              <div style={{ fontSize: 14, lineHeight: 1.8 }}>
+                <div style={{ borderBottom: '1px solid #eee', padding: '8px 0' }}>
+                  <span style={{ color: '#888', marginRight: 10 }}>2021.04.10</span>
+                  ゴールデンウィークの診療時間について
+                </div>
+                <div style={{ borderBottom: '1px solid #eee', padding: '8px 0' }}>
+                  <span style={{ color: '#888', marginRight: 10 }}>2021.03.25</span>
+                  狂犬病予防接種の受付を開始しました
+                </div>
+                <div style={{ borderBottom: '1px solid #eee', padding: '8px 0' }}>
+                  <span style={{ color: '#888', marginRight: 10 }}>2021.02.15</span>
+                  新しくトリミング室を併設いたしました
+                </div>
+              </div>
+            </div>
+            <div style={{ width: 300, background: '#fefefe', border: '1px solid #ffb7c5', padding: 20, borderRadius: 8 }}>
+              <h2 style={{ fontSize: 16, margin: '0 0 10px 0', textAlign: 'center' }}>診療時間</h2>
+              <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ background: '#fff0f3' }}>
+                    <th style={{ padding: 4 }}>時間</th>
+                    <th style={{ padding: 4 }}>月</th>
+                    <th style={{ padding: 4 }}>火</th>
+                    <th style={{ padding: 4 }}>水</th>
+                    <th style={{ padding: 4 }}>木</th>
+                    <th style={{ padding: 4 }}>金</th>
+                    <th style={{ padding: 4 }}>土</th>
+                    <th style={{ padding: 4 }}>日</th>
+                  </tr>
+                </thead>
+                <tbody style={{ textAlign: 'center' }}>
+                  <tr>
+                    <td style={{ padding: 4, background: '#fffafa' }}>9:00-12:00</td>
+                    <td>●</td><td>●</td><td>●</td><td>／</td><td>●</td><td>●</td><td>▲</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: 4, background: '#fffafa' }}>16:00-19:00</td>
+                    <td>●</td><td>●</td><td>●</td><td>／</td><td>●</td><td>▲</td><td>／</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style={{ fontSize: 11, color: '#666', marginTop: 10 }}>
+                ●：通常診療　▲：午前のみ/予約のみ<br/>
+                木曜・日曜午後は休診です。
+              </div>
+            </div>
+          </div>
+
+          <h2 style={{ fontSize: 18, borderLeft: '5px solid #ffb7c5', paddingLeft: 12, marginBottom: 15 }}>当院について</h2>
+          <p style={{ lineHeight: 1.8, fontSize: 14 }}>
+            さくら動物病院は、習志野市津田沼の地に根ざして20年。犬・猫を中心に、小鳥やハムスターなどのエキゾチックアニマルの診療も行っております。
+            「病気を治す」だけでなく、飼い主様とのコミュニケーションを大切にし、予防医療や日頃のケアについても丁寧にご説明することを心がけています。
+          </p>
+
+          <div style={{ marginTop: 30, padding: 20, background: '#fafafa', borderRadius: 8 }}>
+            <h3 style={{ fontSize: 16, marginBottom: 10 }}>アクセス</h3>
+            <div style={{ fontSize: 14, color: '#666' }}>
+              〒275-0016 千葉県習志野市津田沼 2-17-XX<br/>
+              津田沼駅南口より徒歩12分 / 駐車場5台完備
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const getArticleContent = () => {
     if (url.includes('news.narashino-online.local')) {
@@ -249,73 +384,92 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
       return (
         <div style={{ padding: 20, maxWidth: 800 }}>
           <div style={{ fontSize: 13, color: '#70757a', marginBottom: 20 }}>約 1,240,000 件 （0.42 秒） </div>
-          <div style={{ marginBottom: 30 }}>
-            <div 
-              style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => navigateTo('http://news.narashino-online.local/articles/20210414')}
-            >
-              【速報】習志野市津田沼で少女が行方不明 警察が情報提供呼びかけ
+          {[
+            { title: '【速報】習志野市津田沼で少女が行方不明 警察が情報提供呼びかけ', url: 'http://news.narashino-online.local/articles/20210414', desc: '14日午後、習志野市津田沼1丁目の路上で、下校途中の小学生と見られる少女が黒色のワンボックスカーに連れ去られる様子が目撃されました。警察は営利目的誘拐の疑いも視野に...' },
+            { title: '津田沼駅周辺の監視カメラ映像を解析 犯行車両特定へ', url: 'http://police.pref.chiba.local/info/emergency', desc: '習志野警察署は、現場周辺および高速道路入り口の監視カメラ映像の解析を進めています。成田ナンバーの黒色車両が関与している可能性が高く、目撃情報を募っています。' }
+          ].map((res, i) => (
+            <div key={i} style={{ marginBottom: 30 }}>
+              <div 
+                style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer', marginBottom: 4 }}
+                onClick={() => navigateTo(res.url)}
+              >
+                {res.title}
+              </div>
+              <div style={{ color: '#006621', fontSize: 14, marginBottom: 4 }}>{res.url.replace('http://', '')}</div>
+              <div style={{ fontSize: 14, color: '#4d5156', lineHeight: 1.5 }}>{res.desc}</div>
             </div>
-            <div style={{ color: '#006621', fontSize: 14 }}>news.narashino-online.local &gt; articles &gt; 20210414</div>
-            <div style={{ fontSize: 14, color: '#4d5156', marginTop: 5 }}>14日午後、習志野市津田沼1丁目の路上で、下校途中の小学生と見られる少女が黒色のワンボックスカーに連れ去られる様子が目撃されました。警察は営利目的誘拐の疑いも視野に...</div>
-          </div>
-          <div style={{ marginBottom: 30 }}>
-            <div 
-              style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => navigateTo('http://police.pref.chiba.local/info/emergency')}
-            >
-              津田沼駅周辺の監視カメラ映像を解析 犯行車両特定へ
-            </div>
-            <div style={{ color: '#006621', fontSize: 14 }}>police.pref.chiba.local &gt; info &gt; emergency</div>
-            <div style={{ fontSize: 14, color: '#4d5156', marginTop: 5 }}>習志野警察署は、現場周辺および高速道路入り口の監視カメラ映像の解析を進めています。成田ナンバーの黒色車両が関与している可能性が高く、目撃情報を募っています。</div>
-          </div>
+          ))}
         </div>
       );
     }
+
+    if (q.includes('さくら') || q.includes('動物病院')) {
+      return (
+        <div style={{ padding: 20, maxWidth: 800 }}>
+          <div style={{ fontSize: 13, color: '#70757a', marginBottom: 20 }}>約 15,200 件 （0.31 秒） </div>
+          {[
+            { title: 'さくら動物病院 | 習志野市津田沼の犬猫診療・トリミング', url: 'http://sakura-vet.local/', desc: '習志野市津田沼の「さくら動物病院」公式サイト。犬・猫を中心に小鳥やハムスターの診療も行っています。土日診療対応、駐車場5台。あなたの大切な家族に寄り添った医療を。' },
+            { title: '習志野市の動物病院一覧 - 習志野市獣医師会', url: 'http://narashino-vets.local/list', desc: '習志野市内の動物病院マップと診療時間一覧。夜間救急対応病院の案内や、狂犬病予防接種の実施スケジュールについて掲載しています。' }
+          ].map((res, i) => (
+            <div key={i} style={{ marginBottom: 30 }}>
+              <div 
+                style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer', marginBottom: 4 }}
+                onClick={() => navigateTo(res.url)}
+              >
+                {res.title}
+              </div>
+              <div style={{ color: '#006621', fontSize: 14, marginBottom: 4 }}>{res.url.replace('http://', '')}</div>
+              <div style={{ fontSize: 14, color: '#4d5156', lineHeight: 1.5 }}>{res.desc}</div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (q.includes('D-DROP') || q.includes('d-drop') || q.includes('アーカイブ') || q.includes('クラウド')) {
+      return (
+        <div style={{ padding: 20, maxWidth: 800 }}>
+          <div style={{ fontSize: 13, color: '#70757a', marginBottom: 20 }}>約 450 件 （0.28 秒） </div>
+          {[
+            { title: 'D-DROP | 次世代型分散アーカイブ・プラットフォーム', url: 'http://d-drop.net/', desc: 'D-DROPは、軍用レベルの暗号化とP2Pネットワークを活用した完全匿名のデータストレージです。検閲不可能な情報の避難所として、あなたのプライバシーを守ります。' },
+            { title: '分散型ストレージの仕組みとメリット - テックブログ', url: 'http://tech-blog.local/distributed-storage', desc: '中央集権的なサーバーに依存しない分散型アーカイブの技術解説。データの断片化と秘密鍵による復号プロセスの重要性について。' }
+          ].map((res, i) => (
+            <div key={i} style={{ marginBottom: 30 }}>
+              <div 
+                style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer', marginBottom: 4 }}
+                onClick={() => navigateTo(res.url)}
+              >
+                {res.title}
+              </div>
+              <div style={{ color: '#006621', fontSize: 14, marginBottom: 4 }}>{res.url.replace('http://', '')}</div>
+              <div style={{ fontSize: 14, color: '#4d5156', lineHeight: 1.5 }}>{res.desc}</div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
     if (q === 'entertainment' || q === 'エンタメ' || q === 'アイドル') {
       return (
         <div style={{ padding: 20, maxWidth: 800 }}>
           <div style={{ fontSize: 13, color: '#70757a', marginBottom: 20 }}>約 8,500,000 件 （0.35 秒） </div>
-          <div style={{ marginBottom: 30 }}>
-            <div 
-              style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => navigateTo('http://entame-watch.local/news/2104')}
-            >
-              人気アイドルグループ『LUNA』が電撃解散を発表 結成10周年の節目に
+          {[
+            { title: '人気アイドルグループ『LUNA』が電撃解散を発表 結成10周年の節目に', url: 'http://entame-watch.local/news/2104', desc: '5人組アイドルグループ「LUNA」が公式サイトで解散を発表しました。メンバーそれぞれの道へ進むための前向きな決断としており、5月にはラストライブを予定...' },
+            { title: '俳優・加藤健一とモデルの熱愛発覚？ 深夜のドライブデートが激写される', url: 'http://weekly-news.local/scoop/kato', desc: '若手実力派俳優の加藤健一（24）と, 人気ファッションモデルのアンナ（22）の親密な様子が週刊誌によって報じられました。二人は都内のイタリアンレストランで食事をした後...' },
+            { title: '新作アニメ『星屑のレクイエム』放送開始日が決定 豪華声優陣も発表', url: 'http://anime-news.local/2021spring', desc: '待望のオリジナルアニメ『星屑のレクイエム』が4月25日より放送開始されることが分かりました。メインキャストには実力派の面々が揃い、早くもファンの間で期待が高まって...' },
+            { title: '春の新作映画ランキング 『桜の下の約束』が初登場1位を記録', url: 'http://movie-ranking.local/weekly', desc: '先週末の興行収入ランキングが発表され, 人気小説を実写化した恋愛映画『桜の下の約束』が圧倒的な数字で首位を獲得しました。' }
+          ].map((res, i) => (
+            <div key={i} style={{ marginBottom: 30 }}>
+              <div 
+                style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer', marginBottom: 4 }}
+                onClick={() => navigateTo(res.url)}
+              >
+                {res.title}
+              </div>
+              <div style={{ color: '#006621', fontSize: 14, marginBottom: 4 }}>{res.url.replace('http://', '')}</div>
+              <div style={{ fontSize: 14, color: '#4d5156', lineHeight: 1.5 }}>{res.desc}</div>
             </div>
-            <div style={{ color: '#006621', fontSize: 14 }}>entame-watch.local &gt; news &gt; 2104</div>
-            <div style={{ fontSize: 14, color: '#4d5156', marginTop: 5 }}>5人組アイドルグループ「LUNA」が公式サイトで解散を発表しました。メンバーそれぞれの道へ進むための前向きな決断としており、5月にはラストライブを予定...</div>
-          </div>
-          <div style={{ marginBottom: 30 }}>
-            <div 
-              style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => navigateTo('http://weekly-news.local/scoop/kato')}
-            >
-              俳優・加藤健一とモデルの熱愛発覚？ 深夜のドライブデートが激写される
-            </div>
-            <div style={{ color: '#006621', fontSize: 14 }}>weekly-news.local &gt; scoop &gt; kato</div>
-            <div style={{ fontSize: 14, color: '#4d5156', marginTop: 5 }}>若手実力派俳優の加藤健一（24）と, 人気ファッションモデルのアンナ（22）の親密な様子が週刊誌によって報じられました。二人は都内のイタリアンレストランで食事をした後...</div>
-          </div>
-          <div style={{ marginBottom: 30 }}>
-            <div 
-              style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => navigateTo('http://anime-news.local/2021spring')}
-            >
-              新作アニメ『星屑のレクイエム』放送開始日が決定 豪華声優陣も発表
-            </div>
-            <div style={{ color: '#006621', fontSize: 14 }}>anime-news.local &gt; 2021spring</div>
-            <div style={{ fontSize: 14, color: '#4d5156', marginTop: 5 }}>待望のオリジナルアニメ『星屑のレクイエム』が4月25日より放送開始されることが分かりました。メインキャストには実力派の面々が揃い、早くもファンの間で期待が高まって...</div>
-          </div>
-          <div style={{ marginBottom: 30 }}>
-            <div 
-              style={{ fontSize: 20, color: '#1a0dab', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => navigateTo('http://movie-ranking.local/weekly')}
-            >
-              春の新作映画ランキング 『桜の下の約束』が初登場1位を記録
-            </div>
-            <div style={{ color: '#006621', fontSize: 14 }}>movie-ranking.local &gt; weekly</div>
-            <div style={{ fontSize: 14, color: '#4d5156', marginTop: 5 }}>先週末の興行収入ランキングが発表され, 人気小説を実写化した恋愛映画『桜の下の約束』が圧倒的な数字で首位を獲得しました。</div>
-          </div>
+          ))}
         </div>
       );
     }
@@ -630,59 +784,29 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
 
                         {/* ファイルリスト */}
                         <div style={{ flex: 1, padding: 10, overflowY: 'auto' }}>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-                            {pickerFolder === 'desktop' && (
-                              <>
-                                {/* ゴミ箱 */}
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, width: 80 }}>
-                                  <div style={{ width: 32, height: 32, background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🗑️</div>
-                                  <div style={{ fontSize: 11, textAlign: 'center', color: '#333' }}>ゴミ箱</div>
-                                </div>
-                                
-                                {/* D-DROP */}
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, width: 80 }}>
-                                  <div style={{ width: 32, height: 32, background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🔒</div>
-                                  <div style={{ fontSize: 11, textAlign: 'center', color: '#333' }}>D-DROP<br/>Decryptor</div>
-                                </div>
-[...略...]
-                                {/* 証拠ファイル */}
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', gap: 10, padding: 15 }}>
+                            {files
+                              .filter(f => (pickerFolder === 'desktop' ? (f.folder === 'desktop' || !f.folder) : f.folder === pickerFolder))
+                              .map((f) => (
                                 <div 
-                                  onClick={() => {
-                                    setSelectedFileName('operation_report_0415.txt');
-                                    setShowFilePicker(false);
+                                  key={f.id} 
+                                  onClick={() => setSelectedFileName(f.name)}
+                                  style={{ 
+                                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, cursor: 'pointer',
+                                    padding: 5, borderRadius: 3, border: selectedFileName === f.name ? '1px solid #7f9db9' : '1px solid transparent',
+                                    background: selectedFileName === f.name ? '#e5f3ff' : 'transparent'
                                   }}
-                                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, width: 80, cursor: 'pointer', background: selectedFileName === 'operation_report_0415.txt' ? 'rgba(0,85,234,0.1)' : 'transparent', padding: 5, borderRadius: 3, border: selectedFileName === 'operation_report_0415.txt' ? '1px dotted #0055ea' : '1px solid transparent' }}
                                 >
-                                  <FileText size={32} color={selectedFileName === 'operation_report_0415.txt' ? '#0055ea' : '#333'} />
-                                  <div style={{ fontSize: 11, textAlign: 'center', color: '#000', wordBreak: 'break-all' }}>operation_report_0415.txt</div>
+                                  {f.type === 'image' ? <ImageIcon size={32} color="#4a90e2" /> :
+                                   f.type === 'video' ? <FileVideo size={32} color="#e91e63" /> :
+                                   f.type === 'audio' ? <FileAudio size={32} color="#9c27b0" /> :
+                                   f.type === 'trash' ? <Trash2 size={32} color="#666" /> :
+                                   <FileText size={32} color="#999" />}
+                                  <span style={{ fontSize: 10, textAlign: 'center', wordBreak: 'break-all', color: '#000' }}>{f.name}</span>
                                 </div>
-                              </>
-                            )}
-                            {pickerFolder === 'documents' && (
-                              <div 
-                                onClick={() => {
-                                  setSelectedFileName('password_memo.txt');
-                                  setShowFilePicker(false);
-                                }}
-                                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, width: 80, cursor: 'pointer', padding: 5, background: selectedFileName === 'password_memo.txt' ? 'rgba(0,85,234,0.1)' : 'transparent' }}
-                              >
-                                <FileText size={32} color="#999" />
-                                <div style={{ fontSize: 11, textAlign: 'center', color: '#000', wordBreak: 'break-all' }}>password_memo.txt</div>
-                              </div>
-                            )}
-                            {pickerFolder === 'pictures' && (
-                              <div 
-                                onClick={() => {
-                                  setSelectedFileName('vacation_photo.jpg');
-                                  setShowFilePicker(false);
-                                }}
-                                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, width: 80, cursor: 'pointer', padding: 5 }}
-                              >
-                                <ImageIcon size={32} color="#999" />
-                                <div style={{ fontSize: 11, textAlign: 'center', color: '#000', wordBreak: 'break-all' }}>vacation_photo.jpg</div>
-                              </div>
-                            )}
-                            {pickerFolder === 'music' && (
+                              ))
+                            }
+                            {files.filter(f => (pickerFolder === 'desktop' ? (f.folder === 'desktop' || !f.folder) : f.folder === pickerFolder)).length === 0 && (
                               <div style={{ padding: 20, color: '#999', fontSize: 12 }}>フォルダは空です</div>
                             )}
                           </div>
@@ -968,149 +1092,155 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
           )}
           </div>
         </div>
+        ) : isSakuraVet ? (
+          <div style={{ height: '100%', overflowY: 'auto' }}>
+            {getSakuraVetContent()}
+          </div>
         ) : isDDROP ? (
-          <div style={{ background: '#0d0d12', minHeight: '100%', color: '#c8c8d0', fontFamily: "'Courier New', monospace", display: 'flex', flexDirection: 'column' }}>
+          <div style={{ background: '#f4f7f9', minHeight: '100%', color: '#334', fontFamily: "'Courier New', monospace", display: 'flex', flexDirection: 'column' }}>
             {/* D-DROP ヘッダー */}
-            <div style={{ background: 'linear-gradient(to right, #0d0d12, #1a1a2e)', borderBottom: '1px solid #2a2a3e', padding: '12px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 28, height: 28, border: '1px solid #4a4a6a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: '#6a6aaa' }}>◈</div>
-              <span style={{ fontSize: 13, letterSpacing: 3, color: '#7a7aaa', fontWeight: 'bold' }}>D-DROP</span>
-              <span style={{ fontSize: 10, color: '#4a4a6a', marginLeft: 4 }}>v2.4.1 / PRIVATE_NODE</span>
+            <div style={{ background: 'linear-gradient(to right, #ffffff, #e9eff5)', borderBottom: '1px solid #d1d9e6', padding: '12px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: 28, height: 28, border: '1px solid #4488ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: '#4488ff', fontWeight: 'bold' }}>◈</div>
+              <span style={{ fontSize: 13, letterSpacing: 3, color: '#1a1a2e', fontWeight: 'bold' }}>D-DROP</span>
+              <span style={{ fontSize: 10, color: '#88a', marginLeft: 4 }}>v2.4.1 / PRIVATE_NODE</span>
             </div>
 
-            <div style={{ flex: 1, padding: 24 }}>
-            {!isLoggedIn ? (
-              <div style={{ maxWidth: 360, margin: '40px auto' }}>
-                <div style={{ border: '1px solid #2a2a3e', padding: '28px 24px', background: 'rgba(255,255,255,0.02)' }}>
-                  <div style={{ fontSize: 11, letterSpacing: 4, color: '#5a5a8a', marginBottom: 24, textAlign: 'center' }}>AUTHENTICATION REQUIRED</div>
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+            {!isDDROPPortal ? (
+              getDDROPPublicContent()
+            ) : !isLoggedIn ? (
+              <div style={{ maxWidth: 400, margin: '60px auto', padding: '0 20px' }}>
+                <div style={{ border: '1px solid #d1d9e6', padding: '28px 24px', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+                  <div style={{ fontSize: 11, letterSpacing: 4, color: '#4488ff', marginBottom: 24, textAlign: 'center', fontWeight: 'bold' }}>AUTHENTICATION REQUIRED</div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <input
                       placeholder="LOGIN ID"
                       value={loginId} onChange={e => setLoginId(e.target.value)}
-                      style={{ background: 'transparent', color: '#aaaacc', border: 'none', borderBottom: '1px solid #3a3a5a', padding: '8px 4px', outline: 'none', fontSize: 12, letterSpacing: 1 }}
+                      style={{ background: '#f8fafc', color: '#333', border: '1px solid #d1d9e6', padding: '10px 12px', outline: 'none', fontSize: 12, letterSpacing: 1 }}
                     />
                     <input
                       type="password" placeholder="PASSWORD"
                       value={loginPw} onChange={e => setLoginPw(e.target.value)}
                       onKeyDown={e => e.key === 'Enter' && handleLogin()}
-                      style={{ background: 'transparent', color: '#aaaacc', border: 'none', borderBottom: '1px solid #3a3a5a', padding: '8px 4px', outline: 'none', fontSize: 12, letterSpacing: 1 }}
+                      style={{ background: '#f8fafc', color: '#333', border: '1px solid #d1d9e6', padding: '10px 12px', outline: 'none', fontSize: 12, letterSpacing: 1 }}
                     />
-                    {loginError && <div style={{ color: '#cc6655', fontSize: 11 }}>{loginError}</div>}
+                    {loginError && <div style={{ color: '#e53e3e', fontSize: 11 }}>{loginError}</div>}
                     <button
                       onClick={handleLogin}
-                      style={{ marginTop: 12, background: 'transparent', color: '#7a7aaa', border: '1px solid #3a3a5a', padding: '8px', fontSize: 12, cursor: 'pointer', letterSpacing: 2 }}
-                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(100,100,170,0.15)'}
-                      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                      style={{ marginTop: 12, background: '#4488ff', color: '#fff', border: 'none', padding: '10px', fontSize: 12, cursor: 'pointer', letterSpacing: 2, fontWeight: 'bold' }}
+                      onMouseEnter={e => e.currentTarget.style.background = '#3366cc'}
+                      onMouseLeave={e => e.currentTarget.style.background = '#4488ff'}
                     >ENTER</button>
                   </div>
                 </div>
               </div>
             ) : !showReport ? (
-              <div>
-                <div style={{ fontSize: 11, color: '#4a4a6a', marginBottom: 20 }}>
+              <div style={{ padding: 24 }}>
+                <div style={{ fontSize: 11, color: '#88a', marginBottom: 20 }}>
                   SESSION: {loginUser === 'INTERNAL_ROOT' ? 'ROOT' : 'USER'} / {new Date().toISOString().slice(0,10)}
                 </div>
-                <div style={{ fontSize: 12, color: '#5a5a8a', marginBottom: 16, letterSpacing: 1 }}>ARCHIVE INDEX</div>
+                <div style={{ fontSize: 12, color: '#4488ff', marginBottom: 16, letterSpacing: 1, fontWeight: 'bold' }}>ARCHIVE INDEX</div>
                 {loginUser === 'INTERNAL_ROOT' ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <div
                       onClick={() => { setShowReport(true); onReportViewed(); }}
-                      style={{ padding: '12px 16px', border: '1px solid #2a2a3e', background: 'rgba(255,255,255,0.02)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12 }}
-                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(100,100,170,0.1)'}
-                      onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                      style={{ padding: '12px 16px', border: '1px solid #d1d9e6', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12 }}
+                      onMouseEnter={e => e.currentTarget.style.background = '#f0f7ff'}
+                      onMouseLeave={e => e.currentTarget.style.background = '#fff'}
                     >
-                      <Lock size={13} color="#5a5a8a" />
-                      <span style={{ color: '#8a8aaa' }}>evidence_302_location.enc</span>
-                      <span style={{ marginLeft: 'auto', color: '#4a4a6a', fontSize: 10 }}>DECRYPTABLE</span>
+                      <Lock size={13} color="#4488ff" />
+                      <span style={{ color: '#333' }}>evidence_302_location.enc</span>
+                      <span style={{ marginLeft: 'auto', color: '#4488ff', fontSize: 10, fontWeight: 'bold' }}>DECRYPTABLE</span>
                     </div>
-                    <div style={{ padding: '12px 16px', border: '1px solid #1a1a2e', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, opacity: 0.4 }}>
-                      <Lock size={13} color="#3a3a5a" />
-                      <span style={{ color: '#4a4a6a' }}>surveillance_video_backup.mp4</span>
-                      <span style={{ marginLeft: 'auto', color: '#3a3a5a', fontSize: 10 }}>LOCKED</span>
+                    <div style={{ padding: '12px 16px', border: '1px solid #e1e8f0', background: '#f8fafc', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, opacity: 0.5 }}>
+                      <Lock size={13} color="#88a" />
+                      <span style={{ color: '#88a' }}>surveillance_video_backup.mp4</span>
+                      <span style={{ marginLeft: 'auto', color: '#88a', fontSize: 10 }}>LOCKED</span>
                     </div>
                   </div>
                 ) : (
                   <div
                     onClick={() => { setShowReport(true); onReportViewed(); }}
-                    style={{ padding: '12px 16px', border: '1px solid #2a2a3e', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12 }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(100,100,170,0.1)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                    style={{ padding: '12px 16px', border: '1px solid #d1d9e6', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12 }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#f0f7ff'}
+                    onMouseLeave={e => e.currentTarget.style.background = '#fff'}
                   >
-                    <span style={{ color: '#5a5a8a', fontSize: 10 }}>▶</span>
-                    <span style={{ color: '#8a8aaa' }}>20210415_完了報告書.log</span>
-                    <span style={{ marginLeft: 'auto', color: '#4a4a6a', fontSize: 10 }}>2021-04-15</span>
+                    <span style={{ color: '#4488ff', fontSize: 10 }}>▶</span>
+                    <span style={{ color: '#333' }}>20210415_完了報告書.log</span>
+                    <span style={{ marginLeft: 'auto', color: '#88a', fontSize: 10 }}>2021-04-15</span>
                   </div>
                 )}
               </div>
             ) : (
-              <div style={{ lineHeight: 1.8, fontSize: 12 }}>
+              <div style={{ lineHeight: 1.8, fontSize: 12, padding: 24 }}>
                 {loginUser === 'INTERNAL_ROOT' ? (
                   <>
-                    <div style={{ color: '#8888aa', fontSize: 11, marginBottom: 16, borderBottom: '1px solid #4a4a6e', paddingBottom: 8 }}>evidence_302_location.enc — DECRYPTED</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, borderBottom: '1px dashed #4a4a6e', paddingBottom: 24, fontSize: 13 }}>
+                    <div style={{ color: '#4488ff', fontSize: 11, marginBottom: 16, borderBottom: '1px solid #d1d9e6', paddingBottom: 8, fontWeight: 'bold' }}>evidence_302_location.enc — DECRYPTED</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, borderBottom: '1px dashed #d1d9e6', paddingBottom: 24, fontSize: 13, color: '#333' }}>
                       <div style={{ display: 'flex', gap: 16 }}>
-                        <span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ STATUS ]</span>
-                        <span style={{ color: '#e0e0f8' }}>SECURED — 指定ポイント（302号室）に対象を拘禁中</span>
+                        <span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ STATUS ]</span>
+                        <span style={{ color: '#333' }}>SECURED — 指定ポイント（302号室）に対象を拘禁中</span>
                       </div>
                       <div style={{ display: 'flex', gap: 16 }}>
-                        <span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ LOCATION ]</span>
-                        <span style={{ color: '#e0e0f8' }}>千葉県習志野市津田沼 廃ビル 3F-302</span>
+                        <span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ LOCATION ]</span>
+                        <span style={{ color: '#333' }}>千葉県習志野市津田沼 廃ビル 3F-302</span>
                       </div>
                       <div style={{ display: 'flex', gap: 16 }}>
-                        <span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ TARGET ]</span>
-                        <span style={{ color: '#e0e0f8' }}>身代金目的。要求額1億2000万。交渉は難航中。</span>
+                        <span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ TARGET ]</span>
+                        <span style={{ color: '#333' }}>身代金目的。要求額1億2000万。交渉は難航中。</span>
                       </div>
                       <div style={{ display: 'flex', gap: 16 }}>
-                        <span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ DIRECTIVE ]</span>
-                        <span style={{ color: '#e0e0f8' }}>監視カメラログを定期消去し、痕跡を完全に抹消せよ。</span>
+                        <span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ DIRECTIVE ]</span>
+                        <span style={{ color: '#333' }}>監視カメラログを定期消去し、痕跡を完全に抹消せよ。</span>
                       </div>
                       <div style={{ display: 'flex', gap: 16 }}>
-                        <span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ NOTES 1 ]</span>
-                        <span style={{ color: '#e0e0f8', lineHeight: 1.8 }}>
+                        <span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ NOTES 1 ]</span>
+                        <span style={{ color: '#555', lineHeight: 1.8 }}>
                           近隣住民からの通報リスクは低い。防音処理は済んでいる。<br/>
                           ただし、警察のサイバー班が通信の痕跡を追っている可能性がある。<br/>
                           D-DROPのアクセスログは毎日24時に自動で上書き消去すること。
                         </span>
                       </div>
                       <div style={{ display: 'flex', gap: 16 }}>
-                        <span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ NOTES 2 ]</span>
-                        <span style={{ color: '#ffaaaa', lineHeight: 1.8, fontWeight: 'bold' }}>
+                        <span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ NOTES 2 ]</span>
+                        <span style={{ color: '#e53e3e', lineHeight: 1.8, fontWeight: 'bold' }}>
                           現在も監視カメラが作動中。<br/>
-                          2026年の今日でも、彼女はそこに囚われたままだ。<br/>
+                          2026年の今日でも、彼女はそこに囚われたまだ。<br/>
                           この記録が残っている以上、証拠は消えない。
                         </span>
                       </div>
                     </div>
                     
                     {ddropDownloadState === 'downloading' && (
-                      <div style={{ marginTop: 30, background: 'rgba(255,255,255,0.05)', border: '1px solid #4a4a6e', padding: '16px', borderRadius: 4 }}>
-                        <div style={{ fontSize: 13, color: '#aaaacc', marginBottom: 12, fontWeight: 'bold' }}>DETECTED UNUSUAL NETWORK ACTIVITY... DOWNLOADING HIDDEN PAYLOAD...</div>
-                        <div style={{ height: 4, background: '#1a1a2e', borderRadius: 2, overflow: 'hidden' }}>
-                          <div style={{ height: '100%', background: '#4488ff', width: '0%', animation: 'progressFill 2s linear forwards' }} />
+                      <div style={{ marginTop: 30, background: '#f0f7ff', border: '1px solid #4488ff', padding: '16px', borderRadius: 4 }}>
+                        <div style={{ fontSize: 13, color: '#4488ff', marginBottom: 12, fontWeight: 'bold' }}>DETECTED UNUSUAL NETWORK ACTIVITY... DOWNLOADING HIDDEN PAYLOAD...</div>
+                        <div style={{ height: 4, background: '#e1e8f0', borderRadius: 2, overflow: 'hidden' }}>
+                          <div style={{ height: '100%', background: '#4488ff', width: '0%', animation: 'progressFill 0.5s linear forwards' }} />
                         </div>
                       </div>
                     )}
                     
                     {ddropDownloadState === 'complete' && (
-                      <div style={{ marginTop: 30, color: '#44cc88', fontSize: 13, textAlign: 'center', fontWeight: 'bold', padding: '16px', border: '1px dashed #44cc88', background: 'rgba(68,204,136,0.1)' }}>
+                      <div style={{ marginTop: 30, color: '#38a169', fontSize: 13, textAlign: 'center', fontWeight: 'bold', padding: '16px', border: '1px dashed #38a169', background: '#f0fff4' }}>
                         [ ✓ ] SECURE PAYLOAD HAS BEEN EXTRACTED TO LOCAL DESKTOP.
                       </div>
                     )}
 
                     <div style={{ marginTop: 30, textAlign: 'center' }}>
-                      <button onClick={() => { setShowReport(false); setDdropDownloadState('idle'); }} style={{ background: 'transparent', color: '#6a6aaa', border: '1px solid #2a2a3e', padding: '6px 24px', fontSize: 11, cursor: 'pointer', letterSpacing: 1 }} onMouseEnter={e => e.currentTarget.style.background='rgba(255,255,255,0.05)'} onMouseLeave={e => e.currentTarget.style.background='transparent'}>CLOSE ARCHIVE</button>
+                      <button onClick={() => { setShowReport(false); setDdropDownloadState('idle'); }} style={{ background: '#fff', color: '#88a', border: '1px solid #d1d9e6', padding: '6px 24px', fontSize: 11, cursor: 'pointer', letterSpacing: 1 }} onMouseEnter={e => e.currentTarget.style.background='#f8fafc'} onMouseLeave={e => e.currentTarget.style.background='#fff'}>CLOSE ARCHIVE</button>
                     </div>
                   </>
                 ) : (
                   <>
-                    <div style={{ color: '#8888aa', fontSize: 11, marginBottom: 16, borderBottom: '1px solid #4a4a6e', paddingBottom: 8 }}>20210415_完了報告書.log</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 13 }}>
-                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ OP_NAME ]</span><span style={{ color: '#e0e0f8' }}>スズラン</span></div>
-                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ STATUS ]</span><span style={{ color: '#e0e0f8' }}>COMPLETE</span></div>
-                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ DETAIL ]</span><span style={{ color: '#e0e0f8' }}>対象確保。津田沼 302号室へ収容完了。</span></div>
-                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ TIMESTAMP ]</span><span style={{ color: '#e0e0f8' }}>2021-04-15 15:10</span></div>
-                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#aaaacc', minWidth: 90, fontWeight: 'bold' }}>[ OPERATOR ]</span><span style={{ color: '#e0e0f8' }}>Sato</span></div>
+                    <div style={{ color: '#4488ff', fontSize: 11, marginBottom: 16, borderBottom: '1px solid #d1d9e6', paddingBottom: 8, fontWeight: 'bold' }}>20210415_完了報告書.log</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 13, color: '#333' }}>
+                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ OP_NAME ]</span><span>スズラン</span></div>
+                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ STATUS ]</span><span>COMPLETE</span></div>
+                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ DETAIL ]</span><span>対象確保。津田沼 302号室へ収容完了。</span></div>
+                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ TIMESTAMP ]</span><span>2021-04-15 15:10</span></div>
+                      <div style={{ display: 'flex', gap: 16 }}><span style={{ color: '#4488ff', minWidth: 90, fontWeight: 'bold' }}>[ OPERATOR ]</span><span>Sato</span></div>
                     </div>
-                    <button onClick={() => setShowReport(false)} style={{ marginTop: 20, background: 'transparent', color: '#aaaacc', border: '1px solid #4a4a6e', padding: '8px 20px', fontSize: 12, cursor: 'pointer', letterSpacing: 1 }} onMouseEnter={e => e.currentTarget.style.background='rgba(255,255,255,0.05)'} onMouseLeave={e => e.currentTarget.style.background='transparent'}>← BACK TO INDEX</button>
+                    <button onClick={() => setShowReport(false)} style={{ marginTop: 20, background: '#fff', color: '#4488ff', border: '1px solid #4488ff', padding: '8px 20px', fontSize: 12, cursor: 'pointer', letterSpacing: 1 }} onMouseEnter={e => e.currentTarget.style.background='#f0f7ff'} onMouseLeave={e => e.currentTarget.style.background='#fff'}>← BACK TO INDEX</button>
                   </>
                 )}
               </div>

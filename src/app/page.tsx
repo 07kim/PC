@@ -160,7 +160,6 @@ export default function Home() {
 
   const desktopMenuItems = [
     { label: 'アイコンの整列(I)', disabled: true },
-    { label: '最新の情報に更新(E)', action: () => window.location.reload() },
     { separator: true },
     { label: '新規作成(W)', disabled: true },
     { separator: true },
@@ -548,6 +547,7 @@ export default function Home() {
                   systemTime={systemTime} 
                   onReportViewed={addSecretFile} 
                   onTrueEndClear={() => setTrueEndClear(true)}
+                  files={files}
                   hasEvidenceFile={files.some(f => f.id === 'evidence_log')}
                   onDownload={(appId) => {
                     downloadApp(appId);
@@ -611,6 +611,7 @@ export default function Home() {
               {(win.appId === 'settings' || win.id === 'settings') && (
                 <ControlPanelApp 
                   onTimeChange={changeSystemTime}
+                  systemTime={systemTime}
                   desktopWallpaper={desktopWallpaper}
                   setDesktopWallpaper={setDesktopWallpaper}
                   ownerName="佐藤 (Sato)"
@@ -884,7 +885,7 @@ function MaintenanceApp({ onAuthRequest }: { onAuthRequest: () => void }) {
       
       // Simulate high-tech authentication
       setTimeout(() => {
-        setResult('URL: http://d-drop.net/archive\nID: if0e9E3dSj');
+        setResult('URL: http://d-drop.net/portal\nID: if0e9E3dSj');
         setIsAuthenticating(false);
       }, 2500);
     } else {
@@ -1288,6 +1289,7 @@ function SecretApp({ systemTime, onDownloadEvidence, setSystemDialog }: { system
 
 function ControlPanelApp({ 
   onTimeChange, 
+  systemTime,
   desktopWallpaper, 
   setDesktopWallpaper,
   ownerName,
@@ -1295,6 +1297,7 @@ function ControlPanelApp({
   initialPage = 'main'
 }: { 
   onTimeChange: (date: Date) => void, 
+  systemTime: Date,
   desktopWallpaper: string, 
   setDesktopWallpaper: (val: string) => void,
   ownerName: string,
@@ -1307,12 +1310,12 @@ function ControlPanelApp({
     onShowDialog('システム エラー', `${title} は管理者によって制限されています。`, 'error', e?.clientX, e?.clientY);
   };
 
-  const [tYear, setTYear] = useState('2026');
-  const [tMonth, setTMonth] = useState('05');
-  const [tDay, setTDay] = useState('04');
-  const [tHour, setTHour] = useState('13');
-  const [tMinute, setTMinute] = useState('24');
-  const [tSecond, setTSecond] = useState('00');
+  const [tYear, setTYear] = useState(systemTime.getFullYear().toString());
+  const [tMonth, setTMonth] = useState((systemTime.getMonth() + 1).toString().padStart(2, '0'));
+  const [tDay, setTDay] = useState(systemTime.getDate().toString().padStart(2, '0'));
+  const [tHour, setTHour] = useState(systemTime.getHours().toString().padStart(2, '0'));
+  const [tMinute, setTMinute] = useState(systemTime.getMinutes().toString().padStart(2, '0'));
+  const [tSecond, setTSecond] = useState(systemTime.getSeconds().toString().padStart(2, '0'));
 
   const handleApplyTime = () => {
     const newDate = new Date(`${tYear}-${tMonth.padStart(2,'0')}-${tDay.padStart(2,'0')}T${tHour.padStart(2,'0')}:${tMinute.padStart(2,'0')}:${tSecond.padStart(2,'0')}`);
@@ -1962,7 +1965,7 @@ function HackingSequence({ onComplete }: { onComplete: () => void }) {
     return (
       <div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 1000000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'monospace' }}>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 11, letterSpacing: 4, color: '#555', marginBottom: 20 }}>— B A D   E N D —</div>
+          <div style={{ fontSize: 84, letterSpacing: 12, color: '#cc0000', marginBottom: 20, fontWeight: 'bold', textShadow: '0 0 20px rgba(204,0,0,0.5)' }}>— B A D   E N D —</div>
           <h1 style={{ fontSize: 40, color: '#cc0000', marginBottom: 20, letterSpacing: 4, fontWeight: 'bold' }}>SYSTEM TAKEOVER COMPLETE</h1>
           <div style={{ color: '#777', fontSize: 13, lineHeight: 2, maxWidth: 480, margin: '0 auto', marginBottom: 40 }}>
             あなたのデジタル情報はすべて回収された。<br/>
