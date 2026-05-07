@@ -1470,6 +1470,10 @@ function ControlPanelApp({
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 1, fontSize: 10 }}>
               {['日','月','火','水','木','金','土'].map(d => <div key={d} style={{ color: d === '日' ? '#c00' : d === '土' ? '#00c' : '#666', fontWeight: 'bold', paddingBottom: 3 }}>{d}</div>)}
+              {/* Offset for the first day of the month */}
+              {Array.from({ length: new Date(parseInt(tYear), parseInt(tMonth) - 1, 1).getDay() }).map((_, i) => (
+                <div key={`empty-${i}`} />
+              ))}
               {Array.from({ length: getDaysInMonth(parseInt(tYear), parseInt(tMonth)) }).map((_, i) => (
                 <div 
                   key={i} 
