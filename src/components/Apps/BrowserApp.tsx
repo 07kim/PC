@@ -53,7 +53,7 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
 
       timer2 = setTimeout(() => {
         setDdropDownloadState('complete');
-        onDownload('secret');
+        onDownload?.('secret');
       }, 7500); // 7秒後（+0.5秒）で完了
     } else {
       setDdropDownloadState('idle');
@@ -666,7 +666,7 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
               </div>
               <button 
                 onClick={() => {
-                  startDownload('maintenance');
+                  onDownload?.('maintenance');
                 }}
                 style={{ padding: '10px 20px', background: '#0055e0', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer', fontWeight: 'bold' }}
               >
