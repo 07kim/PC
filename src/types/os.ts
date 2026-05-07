@@ -1,7 +1,7 @@
 export interface File {
   id: string;
   name: string;
-  type: 'text' | 'image' | 'trash' | 'folder' | 'browser' | 'mail' | 'paint' | 'music' | 'app' | 'documents' | 'pictures' | 'explorer' | 'desktop';
+  type: 'text' | 'image' | 'video' | 'audio' | 'trash' | 'folder' | 'browser' | 'mail' | 'paint' | 'music' | 'app' | 'documents' | 'pictures' | 'explorer' | 'desktop';
   folder?: string;
   appId?: string;
   content?: string;
