@@ -426,7 +426,7 @@ export const BrowserApp = ({ initialUrl = 'http://msn.local/', systemTime, onRep
       );
     }
 
-    if (q?.includes('D-DROP') || q?.includes('d-drop') || q?.includes('アーカイブ') || q?.includes('クラウド')) {
+    if (q?.toLowerCase().includes('d-drop') || q?.includes('アーカイブ') || q?.includes('クラウド')) {
       return (
         <div style={{ padding: 20, maxWidth: 800 }}>
           <div style={{ fontSize: 13, color: '#70757a', marginBottom: 20 }}>約 450 件 （0.28 秒） </div>
