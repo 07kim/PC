@@ -120,6 +120,32 @@ export default function Home() {
   const [trueEndClear, setTrueEndClear] = useState(false);
   const [isHackingActive, setIsHackingActive] = useState(false);
 
+  const handleOpenApp = (file: File, e?: React.MouseEvent | { clientX: number, clientY: number }) => {
+    if (file.appId === 'secret_app' || file.id === 'secret_app_file' || file.name === 'マル秘.exe') {
+      const isCorrectTime = systemTime.getFullYear() === 2021 &&
+                            systemTime.getMonth() === 3 &&
+                            systemTime.getDate() === 15 &&
+                            systemTime.getHours() === 15 &&
+                            systemTime.getMinutes() === 10;
+      if (!isCorrectTime) {
+        triggerHack();
+        return;
+      }
+    }
+    
+    if (file.isCorrupted) {
+      setSystemDialog({ 
+        title: 'エラー', 
+        message: 'ファイルが破損しているため開くことができません。', 
+        x: e?.clientX, 
+        y: e?.clientY, 
+        type: 'error' 
+      });
+    } else {
+      openWindow(file);
+    }
+  };
+
   // ログイン画面 ステート
   const [loginPhase, setLoginPhase] = useState<'intro' | 'login' | 'desktop' | 'shutdown_confirm' | 'shutdown' | 'logoff_confirm' | 'logoff' | 'power_off'>('intro');
   const [showAltLogin, setShowAltLogin] = useState(false);
@@ -452,7 +478,7 @@ export default function Home() {
                 x: e.clientX, 
                 y: e.clientY,
                 items: file.type === 'trash' ? [
-                  { label: '開く(O)', action: () => openWindow(file) },
+                  { label: '開く(O)', action: () => handleOpenApp(file) },
                   { label: 'ゴミ箱を空にする(B)', action: () => setSystemDialog({ title: 'ゴミ箱', message: 'ゴミ箱はすでに空です。', type: 'info' }), disabled: true },
                   { separator: true },
                   { label: 'ショートカットの作成(S)', disabled: true },
@@ -461,8 +487,8 @@ export default function Home() {
                   { separator: true },
                   { label: 'プロパティ(R)', action: () => setSystemDialog({ title: 'ゴミ箱', message: 'ゴミ箱 (システムフォルダ)', type: 'info' }) }
                 ] : [
-                  { label: '開く(O)', action: () => openWindow(file) },
-                  { label: '編集(E)', action: () => openWindow(file) },
+                  { label: '開く(O)', action: () => handleOpenApp(file) },
+                  { label: '編集(E)', action: () => handleOpenApp(file) },
                   { label: '送る(N)', disabled: true },
                   { separator: true },
                   { label: '切り取り(T)', disabled: true },
@@ -480,11 +506,7 @@ export default function Home() {
               file={isHacked ? { ...file, name: '見ツケタ' } : file}
               onDoubleClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
-                if (file.isCorrupted) {
-                  setSystemDialog({ title: 'エラー', message: 'ファイルが破損しているため開くことができません。', x: e.clientX, y: e.clientY, type: 'error' });
-                } else {
-                  openWindow(file);
-                }
+                handleOpenApp(file, e);
               }}
             />
           </div>
@@ -594,17 +616,7 @@ export default function Home() {
                   files={files} 
                   openWindow={(file, e) => {
                     if (file.type === 'folder') return; // ExplorerApp handles internal navigation
-                    if (file.isCorrupted) {
-                      setSystemDialog({ 
-                        title: 'エラー', 
-                        message: 'ファイルが破損しているため開くことができません。',
-                        x: e?.clientX,
-                        y: e?.clientY,
-                        type: 'error'
-                      });
-                    } else {
-                      openWindow(file);
-                    }
+                    handleOpenApp(file, e as React.MouseEvent);
                   }} 
                 />
               )}
